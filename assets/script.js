@@ -1,23 +1,6 @@
-// GIVEN I am taking a code quiz
-// WHEN I click the start button
-// THEN a timer starts and I am presented with a question
-// WHEN I answer a question
-// THEN I am presented with another question
-// WHEN I answer a question incorrectly
-// THEN time is subtracted from the clock
-// WHEN all questions are answered or the timer reaches 0
-// THEN the game is over
-// WHEN the game is over
-// THEN I can save my initials and my score
-
-
 var inst = document.querySelector('.Instructions')
 var startButton = document.querySelector('.start-button')
 var timerEl = document.querySelector('.timerEl');
-var win = document.querySelector(".win");
-var lose = document.querySelector(".lose");
-var winCounter = 0;
-var loseCounter = 0;
 
 
 // Questions
@@ -80,7 +63,7 @@ function quizStart() {
     startButton.remove();
 
     // timer
-    var timeLeft = 30;
+    var timeLeft = 60;
     timerEl.textContent = 'TIME START';
     var timeInterval = setInterval(function () {
         // As long as the `timeLeft` is greater than 1
@@ -180,11 +163,11 @@ function quizStart() {
                 wrongAnswer.remove();
                 answerEl.remove();
                 questionNumber++;
-                questionPopulate();                
+                questionPopulate();
 
             })
-        // win
-        }else {
+            // win
+        } else {
             clearInterval(timeInterval);
             timerEl.textContent = ("SCORE: " + timeLeft)
             var scoreButton = document.createElement('button');
@@ -194,24 +177,20 @@ function quizStart() {
                 location.href = "./assets/highscore.html"
                 return;
             })
+            // stores score in local storage
+            localStorage.setItem('scoreCount', timeLeft)
 
         }
-
-
-
 
         return;
     }
 
+    // Next question
     questionPopulate();
-
-
 
     return;
 
 }
-
-
 
 // event listener for start button that starts the game
 startButton.addEventListener('click', function () {
@@ -220,15 +199,3 @@ startButton.addEventListener('click', function () {
 
 
 });
-
-
-
-
-// var scores = document.createElement('h3')
-
-
-// var questionEl = document.createElement('h3')
-
-// document.body.appendChild(questionEl);
-
-
